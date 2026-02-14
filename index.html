@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>家事ぶんたん - 見えない家事に気づこう</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- スタート画面 -->
+  <div id="screen-start" class="screen active">
+    <div class="start-container">
+      <h1 class="app-title">家事ぶんたん</h1>
+      <p class="app-subtitle">見えない家事、<br>誰がやってる？</p>
+      <div class="start-description">
+        <p>家事カードをスワイプして<br>誰が担当しているか振り分けよう</p>
+        <div class="swipe-guide">
+          <div class="guide-item">
+            <span class="guide-arrow left">← 左</span>
+            <span class="guide-label">夫がやってる</span>
+          </div>
+          <div class="guide-item">
+            <span class="guide-arrow right">右 →</span>
+            <span class="guide-label">妻がやってる</span>
+          </div>
+          <div class="guide-item">
+            <span class="guide-arrow down">↓ 下</span>
+            <span class="guide-label">どちらもやっていない</span>
+          </div>
+        </div>
+      </div>
+      <button id="btn-start" class="btn-primary">はじめる</button>
+    </div>
+  </div>
+
+  <!-- カードスワイプ画面 -->
+  <div id="screen-cards" class="screen">
+    <div class="cards-header">
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <div id="progress-text" class="progress-text">1 / 10</div>
+    </div>
+
+    <div class="swipe-labels">
+      <div class="swipe-label label-left">🧑 夫</div>
+      <div class="swipe-label label-right">👩 妻</div>
+    </div>
+
+    <div id="card-container" class="card-container">
+      <!-- カードはJSで動的に生成 -->
+    </div>
+
+    <div class="swipe-label label-bottom">どちらも<br>やっていない ↓</div>
+
+    <div class="button-row">
+      <button id="btn-husband" class="btn-action btn-husband" aria-label="夫がやっている">🧑<span>夫</span></button>
+      <button id="btn-neither" class="btn-action btn-neither" aria-label="どちらもやっていない">✕<span>なし</span></button>
+      <button id="btn-wife" class="btn-action btn-wife" aria-label="妻がやっている">👩<span>妻</span></button>
+    </div>
+  </div>
+
+  <!-- 結果画面 -->
+  <div id="screen-result" class="screen">
+    <div class="result-container">
+      <h2 class="result-title">結果</h2>
+      <div class="result-chart">
+        <div class="result-bar-group">
+          <div class="result-label">🧑 夫</div>
+          <div class="result-bar-track">
+            <div id="bar-husband" class="result-bar bar-husband"></div>
+          </div>
+          <div id="count-husband" class="result-count">0</div>
+        </div>
+        <div class="result-bar-group">
+          <div class="result-label">👩 妻</div>
+          <div class="result-bar-track">
+            <div id="bar-wife" class="result-bar bar-wife"></div>
+          </div>
+          <div id="count-wife" class="result-count">0</div>
+        </div>
+        <div class="result-bar-group">
+          <div class="result-label">✕ なし</div>
+          <div class="result-bar-track">
+            <div id="bar-neither" class="result-bar bar-neither"></div>
+          </div>
+          <div id="count-neither" class="result-count">0</div>
+        </div>
+      </div>
+
+      <div id="result-message" class="result-message"></div>
+
+      <div id="result-list" class="result-list">
+        <!-- 振り分け結果のリストがJSで入る -->
+      </div>
+
+      <button id="btn-retry" class="btn-primary">もう10枚やる</button>
+    </div>
+  </div>
+
+  <script src="chores.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

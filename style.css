@@ -1,0 +1,494 @@
+/* === Reset & Base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", "Yu Gothic", sans-serif;
+  background: #f5f0eb;
+  color: #333;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* === Screens === */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Start Screen === */
+.start-container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 400px;
+}
+
+.app-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #2d2d2d;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.app-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.start-description {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.start-description > p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.swipe-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.guide-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+}
+
+.guide-arrow {
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 60px;
+  text-align: center;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+}
+
+.guide-arrow.left {
+  background: #e8f4fd;
+  color: #2196F3;
+}
+
+.guide-arrow.right {
+  background: #fce4ec;
+  color: #e91e63;
+}
+
+.guide-arrow.down {
+  background: #f5f5f5;
+  color: #888;
+}
+
+.guide-label {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* === Button === */
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+/* === Cards Screen === */
+#screen-cards {
+  justify-content: flex-start;
+  padding-top: env(safe-area-inset-top, 16px);
+}
+
+.cards-header {
+  width: 100%;
+  padding: 1rem 1.5rem 0.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e0d8d0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.progress-text {
+  text-align: center;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 600;
+}
+
+/* === Swipe labels === */
+.swipe-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.swipe-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  opacity: 0.6;
+}
+
+.label-left {
+  color: #2196F3;
+  background: #e8f4fd;
+}
+
+.label-right {
+  color: #e91e63;
+  background: #fce4ec;
+}
+
+.label-bottom {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* === Card Container === */
+.card-container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* === Card === */
+.card {
+  position: absolute;
+  width: calc(100% - 3rem);
+  max-width: 360px;
+  min-height: 220px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+}
+
+.card-active {
+  cursor: grab;
+}
+
+.card-active:active {
+  cursor: grabbing;
+}
+
+.card-category {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #764ba2;
+  background: #f3eef8;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  margin-bottom: 1.2rem;
+}
+
+.card-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.6;
+  color: #2d2d2d;
+}
+
+.card-hint {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+/* === Card overlays (swipe feedback) === */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.card-overlay-left {
+  background: rgba(33, 150, 243, 0.15);
+  color: #2196F3;
+  border: 3px solid #2196F3;
+}
+
+.card-overlay-right {
+  background: rgba(233, 30, 99, 0.15);
+  color: #e91e63;
+  border: 3px solid #e91e63;
+}
+
+.card-overlay-down {
+  background: rgba(0, 0, 0, 0.08);
+  color: #888;
+  border: 3px solid #ccc;
+}
+
+/* === Action buttons === */
+.button-row {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1rem 1.5rem;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+  justify-content: center;
+}
+
+.btn-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-action span {
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.btn-action:active {
+  transform: scale(0.9);
+}
+
+.btn-husband {
+  background: #e8f4fd;
+  color: #2196F3;
+}
+
+.btn-wife {
+  background: #fce4ec;
+  color: #e91e63;
+}
+
+.btn-neither {
+  background: #f5f5f5;
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* === Result Screen === */
+#screen-result {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+  padding-top: 2rem;
+}
+
+.result-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem 1.5rem 3rem;
+}
+
+.result-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #2d2d2d;
+}
+
+.result-chart {
+  background: white;
+  border-radius: 16px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.result-bar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.result-bar-group:last-child {
+  margin-bottom: 0;
+}
+
+.result-label {
+  min-width: 55px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.result-bar-track {
+  flex: 1;
+  height: 28px;
+  background: #f0ebe5;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.result-bar {
+  height: 100%;
+  border-radius: 14px;
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.result-bar.animated {
+  /* width is set inline by JS */
+}
+
+.bar-husband {
+  background: linear-gradient(90deg, #64b5f6, #2196F3);
+}
+
+.bar-wife {
+  background: linear-gradient(90deg, #f48fb1, #e91e63);
+}
+
+.bar-neither {
+  background: linear-gradient(90deg, #e0e0e0, #bdbdbd);
+}
+
+.result-count {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.result-message {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  white-space: pre-line;
+}
+
+/* === Result list === */
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid #ccc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.result-item-husband {
+  border-left-color: #2196F3;
+}
+
+.result-item-wife {
+  border-left-color: #e91e63;
+}
+
+.result-item-neither {
+  border-left-color: #ccc;
+}
+
+.result-item-icon {
+  font-size: 1.1rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.result-item-text {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* === Safe area bottom padding === */
+#screen-result .result-container {
+  padding-bottom: max(3rem, env(safe-area-inset-bottom, 3rem));
+}
